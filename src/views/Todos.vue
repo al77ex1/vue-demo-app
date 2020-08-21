@@ -1,8 +1,19 @@
 <template>
-  <div id="app">
-    <h1>Todo app</h1>
+  <div>
+    <h2>Todo List</h2>
+    <router-link to="/">Home</router-link>
     <hr>
-    <router-view />
+    <AddTodo
+      @add-todo="addTodo"
+      />
+    <hr>
+    <Loader v-if="loading" />
+    <TodoList
+      v-else-if="todos.length"
+      v-bind:todos="todos"
+      @remove-todo="removeTodo"
+      />
+    <p v-else>No todos!</p>
   </div>
 </template>
 
@@ -10,12 +21,14 @@
 
   import TodoList from "@/components/TodoList";
 import AddTodo from "@/components/AddTodo";
+import Loader from "@/components/Loader";
 
 export default {
   name: 'App',
   data() {
     return {
-      todos: []
+      todos: [],
+      loading:true,
     }
   },
   mounted() {
@@ -23,11 +36,13 @@ export default {
       .then(response => response.json())
       .then(json => {
         this.todos = json
+        this.loading = false
       })
   },
   components: {
     TodoList,
     AddTodo,
+    Loader,
   },
   methods: {
     removeTodo(id) {
@@ -39,14 +54,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

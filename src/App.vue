@@ -61,7 +61,9 @@ hr {
   text-align: center;
   color: #2c3e50;
   padding: 1rem;
-  height: inherit;
+  height: auto;
+  min-height: 100%;
+  display: table;
   h1 {
     text-align: left;
     text-transform: uppercase;

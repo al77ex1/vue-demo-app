@@ -2,9 +2,7 @@
   <div>
     <h2>Todo List</h2>
     <router-link to="/" class="btn">Home</router-link>
-    <hr />
     <AddTodo @add-todo="addTodo" />
-    <hr />
     <Loader v-if="loading" />
     <TodoList v-else-if="todos.length" v-bind:todos="todos" @remove-todo="removeTodo" />
     <p v-else>No todos!</p>
@@ -53,7 +51,7 @@ export default {
   color: white;
   text-decoration: none;
   background-color: #36495d;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   text-transform: uppercase;
   display: inline-block;
   transition: 0.3s;
